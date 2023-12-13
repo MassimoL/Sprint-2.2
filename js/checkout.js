@@ -4,6 +4,19 @@ function validate(event) {
 
 	let error = 0;	
 
+	let forms = document.querySelectorAll('.needs-validation');
+
+	var form = forms[0];
+
+	form.addEventListener('submit', event => {
+		if (!form.checkValidity()) {
+		  event.preventDefault()
+		  event.stopPropagation()
+		}
+  
+		form.classList.add('was-validated')
+	  }, false)
+
 	event.preventDefault(); // To avoid reloading the page when clicking SAVE and to display the console.log
 	
 	let lettersOnly = /^[A-Za-z]+$/
@@ -52,6 +65,7 @@ function validate(event) {
     }
 
 	if(error > 0){
+		event.preventDefault();
 		console.log("Error");
 	}else{
 		console.log("OK" +
